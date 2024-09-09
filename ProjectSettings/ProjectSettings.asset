@@ -719,11 +719,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: 22bea976-d83f-41c0-b385-c388380e9e4e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: TerrorGame
+  organizationId: jvictorppaiva
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
