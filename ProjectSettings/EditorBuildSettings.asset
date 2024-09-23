@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/0_Menu.unity
+    guid: 7b182ce72fbd04392b449b397baf4fad
+  - enabled: 1
+    path: "Assets/Scenes/Opc\u0327o\u0303es.unity"
+    guid: 8c9dfa4df9f4e478d90ce3dedbaacb3b
+  - enabled: 1
     path: Assets/Scenes/Casa Fora.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/0_Menu.unity
-    guid: 7b182ce72fbd04392b449b397baf4fad
+    path: Assets/Scenes/Casa Dentro.unity
+    guid: 047941bcb62924da284627b934ee5575
   m_configObjects: {}

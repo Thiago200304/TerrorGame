@@ -1449,8 +1449,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1617341429}
-        m_TargetAssemblyTypeName: Jogar, Assembly-CSharp
+      - m_Target: {fileID: 1617341435}
+        m_TargetAssemblyTypeName: "Op\xE7\xF5es, Assembly-CSharp"
         m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
