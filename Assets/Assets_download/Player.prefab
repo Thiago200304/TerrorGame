@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashlight: {fileID: 1620106506}
+  batterySlider: {fileID: 0}
+  batteryLife: 30
 --- !u!1 &222432229328427669
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,17 +1,90 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class FlashlightController : MonoBehaviour
 {
-    public Light flashlight; // Arraste a Spot Light para este campo no Inspector
-    private bool isOn = true; // Define se a lanterna está ligada ou desligada
+    public Light flashlight;           // Referência à Spot Light da lanterna
+    public Slider batterySlider;       // Referência à barra de energia da lanterna (UI Slider)
+    public float batteryLife = 30f;    // Duração da bateria em segundos (30 segundos)
+    private float currentBatteryLife;
+    private bool isOn = false;         // Estado da lanterna (ligada/desligada)
+    private bool isRecharging = false; // Verifica se está recarregando devido ao esgotamento total
+    private Image sliderFill;          // Componente de cor da barra de bateria
 
-    void Update()
+    private void Start()
     {
-        // Pressionar "F" alterna a lanterna
-        if (Input.GetKeyDown(KeyCode.F))
+        currentBatteryLife = batteryLife;   // Inicia a bateria com carga total
+        batterySlider.maxValue = batteryLife;
+        batterySlider.value = currentBatteryLife;
+        sliderFill = batterySlider.fillRect.GetComponent<Image>();
+        UpdateSliderColor();
+        flashlight.enabled = isOn;
+    }
+
+    private void Update()
+    {
+        // Liga/desliga a lanterna com a tecla "F"
+        if (Input.GetKeyDown(KeyCode.F) && !isRecharging)
         {
             isOn = !isOn;
-            flashlight.enabled = isOn; // Habilita/desabilita a luz
+            flashlight.enabled = isOn;
+        }
+
+        // Descarrega ou recarrega a bateria dependendo do estado da lanterna
+        if (isOn)
+        {
+            if (currentBatteryLife > 0)
+            {
+                currentBatteryLife -= Time.deltaTime;
+                UpdateSliderColor();
+            }
+            else
+            {
+                StartCoroutine(HandleBatteryDepletion());
+            }
+        }
+        else
+        {
+            if (currentBatteryLife < batteryLife)
+            {
+                currentBatteryLife += Time.deltaTime;
+                UpdateSliderColor();
+            }
+        }
+
+        // Atualiza o valor da barra de bateria
+        batterySlider.value = currentBatteryLife;
+    }
+
+    // Corrotina que lida com a lanterna ao atingir carga zero
+    private IEnumerator HandleBatteryDepletion()
+    {
+        isOn = false;
+        flashlight.enabled = false;
+        isRecharging = true;
+        sliderFill.color = Color.red;  // Muda a cor para vermelho quando a bateria acaba
+
+        yield return new WaitForSeconds(15f); // Espera 15 segundos para recarregar
+
+        isRecharging = false;
+        UpdateSliderColor(); // Atualiza a cor quando a recarga começa
+    }
+
+    // Atualiza a cor do slider de acordo com o estado da bateria e lanterna
+    private void UpdateSliderColor()
+    {
+        if (isRecharging)
+        {
+            sliderFill.color = Color.red; // Vermelho enquanto recarrega devido ao esgotamento completo
+        }
+        else if (!isOn)
+        {
+            sliderFill.color = Color.white; // Branco enquanto recarrega normalmente
+        }
+        else
+        {
+            sliderFill.color = Color.yellow; // Amarelo enquanto a lanterna está ligada
         }
     }
 }
