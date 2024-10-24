@@ -14,16 +14,61 @@ public class FPSController : MonoBehaviour
 
     public float gravity = -9.81f; // Gravidade
 
+    private bool canmove = false;
+
+    public GameObject lanterna; // Referência ao prefab Lanterna
+    public GameObject bateria;  // Referência ao prefab Bateria
+    public GameObject menu;     // Referência ao Canvas (Menu)
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        if (lanterna != null)
+        {
+            lanterna.SetActive(false); // Garantir que a lanterna começa desativada
+        }
+
+        if (bateria != null)
+        {
+            bateria.SetActive(false); // Garantir que a bateria começa desativada
+        }
+
+        if (menu != null)
+        {
+            menu.SetActive(true); // Garantir que o menu começa ativado
+        }
     }
 
     void Update()
     {
-        Move();
-        LookAround();
+        if (canmove)
+        {
+            Move();
+            LookAround();
+        }
+
+        // Ao clicar na tela, ativa o movimento, a lanterna e a bateria, e desativa o menu
+        if (Input.GetMouseButtonDown(0))
+        {
+            canmove = true;
+
+            if (lanterna != null)
+            {
+                lanterna.SetActive(true); // Ativa o prefab Lanterna
+            }
+
+            if (bateria != null)
+            {
+                bateria.SetActive(true); // Ativa o prefab Bateria
+            }
+
+            if (menu != null)
+            {
+                menu.SetActive(false); // Desativa o menu (Canvas)
+            }
+        }
     }
 
     private void Move()
