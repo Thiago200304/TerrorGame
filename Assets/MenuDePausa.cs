@@ -3,6 +3,7 @@ using UnityEngine;
 public class MenuDePausa : MonoBehaviour
 {
     public GameObject pauseMenuCanvas; // O Canvas do menu de pausa
+    public MonoBehaviour cameraController; // Referência ao script de controle de câmera
     public FPSController playerController; // Referência ao script do player
     private bool isPaused = false; // Controle para verificar se o jogo está pausado
 
@@ -34,6 +35,7 @@ public class MenuDePausa : MonoBehaviour
         Time.timeScale = 0f; // Pausa o jogo
         Cursor.lockState = CursorLockMode.None; // Libera o cursor
         Cursor.visible = true; // Torna o cursor visível
+        cameraController.enabled = false; // Desativa o controle da câmera
         isPaused = true;
     }
 
@@ -44,6 +46,7 @@ public class MenuDePausa : MonoBehaviour
         Time.timeScale = 1f; // Retoma o jogo
         Cursor.lockState = CursorLockMode.Locked; // Tranca o cursor
         Cursor.visible = false; // Torna o cursor invisível
+        cameraController.enabled = true; // Reativa o controle da câmera
         isPaused = false;
     }
 

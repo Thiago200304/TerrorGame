@@ -477,6 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuCanvas: {fileID: 223974227}
+  cameraController: {fileID: 44354551}
   playerController: {fileID: 44354551}
 --- !u!4 &40919616
 Transform:
@@ -993,6 +994,10 @@ PrefabInstance:
     - target: {fileID: 6640855486633900826, guid: 6946cc53379f92041b366027c727293b, type: 3}
       propertyPath: m_Name
       value: Menudojogo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640855486633900826, guid: 6946cc53379f92041b366027c727293b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6640855486633900829, guid: 6946cc53379f92041b366027c727293b, type: 3}
       propertyPath: m_Pivot.x

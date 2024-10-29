@@ -6437,7 +6437,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuCanvas: {fileID: 350359489}
-  playerController: {fileID: 0}
+  cameraController: {fileID: 704177796}
+  playerController: {fileID: 704177796}
 --- !u!4 &315178406
 Transform:
   m_ObjectHideFlags: 0
@@ -17344,6 +17345,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62a6f4ab7ddf34f47a2fa895d6963fb7, type: 3}
+--- !u!114 &704177796 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2634865536683791059, guid: 62a6f4ab7ddf34f47a2fa895d6963fb7, type: 3}
+  m_PrefabInstance: {fileID: 704177795}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5bd502d3aef3f745bb3e1b7d50693b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &714116586
 PrefabInstance:
   m_ObjectHideFlags: 0
