@@ -6,6 +6,7 @@ TagManager:
   tags:
   - collider
   - Alvo
+  - colidir
   layers:
   - Default
   - TransparentFX
