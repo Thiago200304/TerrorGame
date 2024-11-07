@@ -5821,7 +5821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988528143750009177, guid: 52dcc50deab3fa546bea09c01d45f2c7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5988528143750009253, guid: 52dcc50deab3fa546bea09c01d45f2c7, type: 3}
       propertyPath: m_Pivot.x
@@ -18174,17 +18174,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. \r\nUt enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    \r\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-    eu fugiat nulla pariatur. \r\nExcepteur sint occaecat cupidatat non proident,
-    sunt in culpa qui officia deserunt mollit anim id est laborum. \r\nCurabitur
-    pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et
-    commodo pharetra.\r\n"
+  m_text: "Quarenta anos se passaram desde o tr\xE1gico inc\xEAndio que vitimou a
+    pequena Maria. Assombrado pela culpa, um bombeiro aposentado retorna \xE0 casa
+    destru\xEDda em busca de respostas. Uma fita cassete, a \xFAnica testemunha muda,
+    o leva a uma jornada sombria para desvendar a verdade. Mas a casa esconde segredos
+    obscuros e a alma de Maria, presa ao local, o persegue em cada canto. A cada
+    fita encontrada, mais perto ele est\xE1 da verdade e mais distante da sanidade.
+    Escondido nas sombras, ele precisa escapar da menina e dos mist\xE9rios do passado
+    antes que a loucura o consuma."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1298d3cc4296846cfaef05e5fb4d6830, type: 2}
+  m_sharedMaterial: {fileID: 8507791475361497112, guid: 1298d3cc4296846cfaef05e5fb4d6830, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18208,7 +18208,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.75
+  m_fontSize: 39.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -23454,14 +23454,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8235294}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 2cbd4557352c9a046a94e6ed8a06c71c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -41534,6 +41534,10 @@ PrefabInstance:
     - target: {fileID: 6640855486633900826, guid: 6946cc53379f92041b366027c727293b, type: 3}
       propertyPath: m_Name
       value: Menudojogo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640855486633900826, guid: 6946cc53379f92041b366027c727293b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6640855486633900829, guid: 6946cc53379f92041b366027c727293b, type: 3}
       propertyPath: m_Pivot.x
