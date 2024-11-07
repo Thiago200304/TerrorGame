@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro; // Importar biblioteca TextMeshPro
 
 public class FPSController : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class FPSController : MonoBehaviour
     public GameObject lanterna; // Referência ao prefab Lanterna
     public GameObject bateria;  // Referência ao prefab Bateria
     public GameObject menu;     // Referência ao Canvas (Menu)
+    public TextMeshProUGUI mensagem; // Referência ao componente TextMeshPro da mensagem
+
+    private float mensagemTimer = 0f; // Temporizador da mensagem
+    private bool mostrandoMensagem = false; // Controle da exibição da mensagem
+    private bool mensagemMostrada = false; // Verifica se a mensagem já foi mostrada
 
     void Start()
     {
@@ -39,6 +45,11 @@ public class FPSController : MonoBehaviour
         {
             menu.SetActive(true); // Garantir que o menu começa ativado
         }
+
+        if (mensagem != null)
+        {
+            mensagem.gameObject.SetActive(false); // Desativa a mensagem inicialmente
+        }
     }
 
     void Update()
@@ -49,8 +60,8 @@ public class FPSController : MonoBehaviour
             LookAround();
         }
 
-        // Ao clicar na tela, ativa o movimento, a lanterna e a bateria, e desativa o menu
-        if (Input.GetMouseButtonDown(0))
+        // Ao clicar na tela, ativa o movimento, a lanterna e a bateria, desativa o menu e mostra a mensagem
+        if (Input.GetMouseButtonDown(0) && !mensagemMostrada)
         {
             canmove = true;
 
@@ -67,6 +78,19 @@ public class FPSController : MonoBehaviour
             if (menu != null)
             {
                 menu.SetActive(false); // Desativa o menu (Canvas)
+            }
+
+            MostrarMensagem("ENCONTRE A FITA");
+            mensagemMostrada = true; // Define que a mensagem já foi mostrada
+        }
+
+        // Atualizar a exibição da mensagem se estiver ativa
+        if (mostrandoMensagem)
+        {
+            mensagemTimer += Time.deltaTime;
+            if (mensagemTimer >= 5f)
+            {
+                OcultarMensagem();
             }
         }
     }
@@ -107,5 +131,27 @@ public class FPSController : MonoBehaviour
 
         cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    // Função para mostrar a mensagem
+    private void MostrarMensagem(string texto)
+    {
+        if (mensagem != null)
+        {
+            mensagem.text = texto;
+            mensagem.gameObject.SetActive(true);
+            mostrandoMensagem = true;
+            mensagemTimer = 0f; // Reinicia o temporizador
+        }
+    }
+
+    // Função para ocultar a mensagem
+    private void OcultarMensagem()
+    {
+        if (mensagem != null)
+        {
+            mensagem.gameObject.SetActive(false);
+            mostrandoMensagem = false;
+        }
     }
 }
