@@ -8,8 +8,17 @@ public class DestroyOnCollision : MonoBehaviour
     public GameObject proxfita;
     public GameObject porta;
     public bool primeirafita;
-    public TextMeshProUGUI mensagemTexto; // Referência para o objeto de texto
-    public float duracaoMensagem = 5f; // Duração que a mensagem ficará visível
+    public TextMeshProUGUI mensagemTexto; // Referï¿½ncia para o objeto de texto
+    public float duracaoMensagem = 5f; // Duraï¿½ï¿½o que a mensagem ficarï¿½ visï¿½vel
+
+
+public string texto1;
+public string texto2;
+
+
+public int ID;
+
+public bool fitacoletada;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,7 +33,7 @@ public class DestroyOnCollision : MonoBehaviour
                 mensagemTexto.text = "ENTRE NA CASA";
                 mensagemTexto.gameObject.SetActive(true);
 
-                // Inicia a corrotina para ocultar a mensagem após a duração configurada
+                // Inicia a corrotina para ocultar a mensagem apï¿½s a duraï¿½ï¿½o configurada
                 StartCoroutine(OcultarMensagem());
 
                 Destroy(gameObject);
@@ -33,10 +42,35 @@ public class DestroyOnCollision : MonoBehaviour
             {
                 proxfita.SetActive(true);
                 GameData.numerodefitas++;
-                Destroy(gameObject);
+              
+              //mostrar menu
+              //atualizar o texto do menu
+
+//if(ID==1){
+    //texto 1
+//}
+
+              // parar o player
+
+              fitacoletada=true;
+          
+           
+          
             }
         }
     }
+
+
+void Update(){
+
+if (fitacoletada==true&&Input.GetMouseButtonDown(0)){
+
+//fecha menu
+//ativa o player
+
+ Destroy(gameObject);
+
+}
 
     private IEnumerator OcultarMensagem()
     {
