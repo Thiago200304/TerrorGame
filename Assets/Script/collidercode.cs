@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class collidercode : MonoBehaviour
 {
-    // Referência ao objeto que exibirá o texto
-    public TextMeshProUGUI textoMensagem;
+    // Referência ao objeto que terá o MeshRenderer ativado/desativado
+    private MeshRenderer targetMeshRenderer;
+
+    // Tag do objeto que queremos controlar o MeshRenderer
+    public string targetTag = "Alvo";
 
     // Nome da cena que será carregada (atualizado para "Casa")
     public string sceneToLoad = "Casa";
@@ -17,14 +19,16 @@ public class collidercode : MonoBehaviour
 
     private void Start()
     {
-        // Verifica se o texto está configurado, se não, exibe uma mensagem de erro
-        if (textoMensagem == null)
+        // Procurando o objeto pela tag e pegando seu MeshRenderer
+        GameObject targetObject = GameObject.FindGameObjectWithTag(targetTag);
+
+        if (targetObject != null)
         {
-            Debug.LogError("Referência para o TextMeshProUGUI não atribuída.");
+            targetMeshRenderer = targetObject.GetComponent<MeshRenderer>();
         }
         else
         {
-            textoMensagem.gameObject.SetActive(false); // Desativa o texto no início
+            Debug.LogError("Nenhum objeto encontrado com a tag: " + targetTag);
         }
     }
 
@@ -42,9 +46,9 @@ public class collidercode : MonoBehaviour
         // Quando colidir com um objeto que tem a tag Player (ou qualquer tag que você defina)
         if (other.CompareTag("Player"))
         {
-            if (textoMensagem != null)
+            if (targetMeshRenderer != null)
             {
-                textoMensagem.gameObject.SetActive(true); // Exibe o texto
+                targetMeshRenderer.enabled = true; // Liga o MeshRenderer
             }
             playerInsideTrigger = true; // Marca que o player está dentro da área
         }
@@ -55,9 +59,9 @@ public class collidercode : MonoBehaviour
         // Quando o objeto sai da área de colisão
         if (other.CompareTag("Player"))
         {
-            if (textoMensagem != null)
+            if (targetMeshRenderer != null)
             {
-                textoMensagem.gameObject.SetActive(false); // Oculta o texto
+                targetMeshRenderer.enabled = false; // Desliga o MeshRenderer
             }
             playerInsideTrigger = false; // Marca que o player saiu da área
         }
@@ -68,4 +72,5 @@ public class collidercode : MonoBehaviour
         // Carrega a cena "Casa"
         SceneManager.LoadScene(sceneToLoad);
     }
+
 }
