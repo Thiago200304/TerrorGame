@@ -1,5 +1,5 @@
+using TMPro; // Para usar TextMeshPro
 using UnityEngine;
-using TMPro; // Importar biblioteca TextMeshPro
 
 public class FPSController : MonoBehaviour
 {
@@ -21,10 +21,16 @@ public class FPSController : MonoBehaviour
     public GameObject bateria;  // Referência ao prefab Bateria
     public GameObject menu;     // Referência ao Canvas (Menu)
     public TextMeshProUGUI mensagem; // Referência ao componente TextMeshPro da mensagem
+    public TextMeshProUGUI timerTexto; // Referência ao TextMeshPro para mostrar o timer
 
     private float mensagemTimer = 0f; // Temporizador da mensagem
     private bool mostrandoMensagem = false; // Controle da exibição da mensagem
     private bool mensagemMostrada = false; // Verifica se a mensagem já foi mostrada
+
+    public float timer = 60f; // Timer de 1 minuto
+    public GameObject canvasDerrota; // Referência ao Canvas de Derrota
+
+    public float duracaoMensagem = 5f; // Duração da mensagem em segundos
 
     void Start()
     {
@@ -50,6 +56,16 @@ public class FPSController : MonoBehaviour
         {
             mensagem.gameObject.SetActive(false); // Desativa a mensagem inicialmente
         }
+
+        if (timerTexto != null)
+        {
+            timerTexto.gameObject.SetActive(true); // Certifique-se de que o texto do timer está ativo
+        }
+
+        if (canvasDerrota != null)
+        {
+            canvasDerrota.SetActive(false); // Certifique-se de que o canvas de derrota está inicialmente oculto
+        }
     }
 
     void Update()
@@ -60,35 +76,50 @@ public class FPSController : MonoBehaviour
             LookAround();
         }
 
-        // Ao clicar na tela, ativa o movimento, a lanterna e a bateria, desativa o menu e mostra a mensagem
         if (Input.GetMouseButtonDown(0) && !mensagemMostrada)
         {
             canmove = true;
 
             if (lanterna != null)
             {
-                lanterna.SetActive(true); // Ativa o prefab Lanterna
+                lanterna.SetActive(true); // Ativa a lanterna
             }
 
             if (bateria != null)
             {
-                bateria.SetActive(true); // Ativa o prefab Bateria
+                bateria.SetActive(true); // Ativa a bateria
             }
 
             if (menu != null)
             {
-                menu.SetActive(false); // Desativa o menu (Canvas)
+                menu.SetActive(false); // Desativa o menu
             }
 
             MostrarMensagem("ENCONTRE A FITA");
-            mensagemMostrada = true; // Define que a mensagem já foi mostrada
+            mensagemMostrada = true; // Define que a mensagem foi mostrada
         }
 
-        // Atualizar a exibição da mensagem se estiver ativa
-        if (mostrandoMensagem)
+        // Atualizar o timer
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime; // Diminui o timer a cada frame
+            if (timerTexto != null)
+            {
+                // Atualiza o texto do timer na tela com o tempo restante
+                timerTexto.text = "Tempo: " + Mathf.Ceil(timer).ToString() + "s";
+            }
+        }
+        else
+        {
+            // Quando o tempo acabar, chama a função de derrota
+            EndGame();
+        }
+
+        // Atualizar a exibição da mensagem, se estiver visível
+        if (mensagemMostrada)
         {
             mensagemTimer += Time.deltaTime;
-            if (mensagemTimer >= 5f)
+            if (mensagemTimer >= duracaoMensagem)
             {
                 OcultarMensagem();
             }
@@ -151,7 +182,28 @@ public class FPSController : MonoBehaviour
         if (mensagem != null)
         {
             mensagem.gameObject.SetActive(false);
-            mostrandoMensagem = false;
+            mensagemMostrada = false;
         }
+    }
+
+    // Método para reiniciar o timer
+    public void ReiniciarTimer()
+    {
+        timer = 60f; // Reinicia o timer para 60 segundos
+    }
+
+    // Função de derrota, exibe o Canvas de derrota
+    private void EndGame()
+    {
+        // Pausa o jogo
+        Time.timeScale = 0f;
+
+        // Exibe o Canvas de Derrota
+        if (canvasDerrota != null)
+        {
+            canvasDerrota.SetActive(true); // Mostra o Canvas de derrota
+        }
+
+        // Opcional: Você pode adicionar som, animação ou outras lógicas de derrota aqui
     }
 }

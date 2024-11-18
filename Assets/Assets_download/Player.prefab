@@ -582,7 +582,9 @@ MonoBehaviour:
   lanterna: {fileID: 1620106504}
   bateria: {fileID: 0}
   menu: {fileID: 0}
+  derrotaCanvas: {fileID: 0}
   mensagem: {fileID: 0}
+  timerTexto: {fileID: 0}
 --- !u!1001 &274464624
 PrefabInstance:
   m_ObjectHideFlags: 0

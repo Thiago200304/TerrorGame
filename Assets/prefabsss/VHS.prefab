@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2951222045244447850}
-  m_LocalRotation: {x: 0.072100066, y: 0.6036946, z: -0.054954506, w: 0.79204446}
+  m_LocalRotation: {x: 0.072102666, y: 0.60369337, z: -0.054956336, w: 0.7920451}
   m_LocalPosition: {x: -10.219, y: 0.729, z: -5.522}
   m_LocalScale: {x: 4.9216866, y: 4.9216866, z: 4.9216866}
   m_ConstrainProportionsScale: 0
@@ -117,7 +117,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   proxfita: {fileID: 0}
   porta: {fileID: 0}
-  primeirafita: 0
+  primeirafita: 1
+  mensagemTexto: {fileID: 0}
+  duracaoMensagem: 2
+  texto1: 
+  texto2: 
+  ID: 0
+  fitacoletada: 0
+  fpsController: {fileID: 0}
 --- !u!135 &2951222045244447858
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -129,7 +136,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.08
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0.000000029802322, z: 0}
 --- !u!1001 &2951222045640615006
 PrefabInstance:
