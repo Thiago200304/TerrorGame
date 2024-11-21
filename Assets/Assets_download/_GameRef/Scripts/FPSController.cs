@@ -32,10 +32,15 @@ public class FPSController : MonoBehaviour
 
     public float duracaoMensagem = 5f; // Duração da mensagem em segundos
 
+    // Variáveis para o áudio
+    public AudioSource audioSource; // Referência ao AudioSource
+    public AudioClip audioAndar;    // Áudio para andar
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None; // Libera o cursor no início
+        Cursor.visible = true;
 
         if (lanterna != null)
         {
@@ -60,11 +65,17 @@ public class FPSController : MonoBehaviour
         if (timerTexto != null)
         {
             timerTexto.gameObject.SetActive(true); // Certifique-se de que o texto do timer está ativo
+            timerTexto.text = "Tempo: " + Mathf.Ceil(timer).ToString() + "s"; // Exibe o timer inicial
         }
 
         if (canvasDerrota != null)
         {
             canvasDerrota.SetActive(false); // Certifique-se de que o canvas de derrota está inicialmente oculto
+        }
+
+        if (audioSource != null && audioAndar != null)
+        {
+            audioSource.clip = audioAndar; // Define o áudio que será tocado ao andar
         }
     }
 
@@ -95,23 +106,24 @@ public class FPSController : MonoBehaviour
                 menu.SetActive(false); // Desativa o menu
             }
 
+            Cursor.lockState = CursorLockMode.Locked; // Trava o cursor novamente
+            Cursor.visible = false; // Torna o cursor invisível
+
             MostrarMensagem("ENCONTRE A FITA");
             mensagemMostrada = true; // Define que a mensagem foi mostrada
         }
 
         // Atualizar o timer
-        if (timer > 0)
+        if (canmove && timer > 0)
         {
             timer -= Time.deltaTime; // Diminui o timer a cada frame
             if (timerTexto != null)
             {
-                // Atualiza o texto do timer na tela com o tempo restante
                 timerTexto.text = "Tempo: " + Mathf.Ceil(timer).ToString() + "s";
             }
         }
-        else
+        else if (timer <= 0)
         {
-            // Quando o tempo acabar, chama a função de derrota
             EndGame();
         }
 
@@ -128,7 +140,6 @@ public class FPSController : MonoBehaviour
 
     private void Move()
     {
-        // Verificar se está no chão
         isGrounded = characterController.isGrounded;
         if (isGrounded && velocity.y < 0)
         {
@@ -141,13 +152,28 @@ public class FPSController : MonoBehaviour
         Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
         characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
 
+        // Tocar o áudio enquanto anda
+        if (moveX != 0f || moveZ != 0f) // Se houver movimento
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play(); // Reproduz o áudio ao andar
+            }
+        }
+        else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop(); // Para o áudio quando o movimento parar
+            }
+        }
+
         // Pular
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        // Aplicar gravidade
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
@@ -164,7 +190,6 @@ public class FPSController : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-    // Função para mostrar a mensagem
     private void MostrarMensagem(string texto)
     {
         if (mensagem != null)
@@ -176,7 +201,6 @@ public class FPSController : MonoBehaviour
         }
     }
 
-    // Função para ocultar a mensagem
     private void OcultarMensagem()
     {
         if (mensagem != null)
@@ -186,24 +210,25 @@ public class FPSController : MonoBehaviour
         }
     }
 
-    // Método para reiniciar o timer
     public void ReiniciarTimer()
     {
         timer = 60f; // Reinicia o timer para 60 segundos
+        if (timerTexto != null)
+        {
+            timerTexto.text = "Tempo: " + Mathf.Ceil(timer).ToString() + "s";
+        }
     }
 
-    // Função de derrota, exibe o Canvas de derrota
     private void EndGame()
     {
-        // Pausa o jogo
         Time.timeScale = 0f;
 
-        // Exibe o Canvas de Derrota
         if (canvasDerrota != null)
         {
             canvasDerrota.SetActive(true); // Mostra o Canvas de derrota
         }
 
-        // Opcional: Você pode adicionar som, animação ou outras lógicas de derrota aqui
+        Cursor.lockState = CursorLockMode.None; // Libera o cursor
+        Cursor.visible = true; // Torna o cursor visível
     }
 }
