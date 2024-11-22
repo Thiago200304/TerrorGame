@@ -6,6 +6,8 @@ public class FlashlightController : MonoBehaviour
 {
     public Light flashlight;           // Referência à Spot Light da lanterna
     public Slider batterySlider;       // Referência à barra de energia da lanterna (UI Slider)
+    public AudioSource flashlightAudio; // Referência ao AudioSource para tocar o som
+    public AudioClip toggleSound;      // O som que será tocado ao ligar/desligar a lanterna
     public float batteryLife = 30f;    // Duração da bateria em segundos (30 segundos)
     private float currentBatteryLife;
     private bool isOn = false;         // Estado da lanterna (ligada/desligada)
@@ -29,6 +31,7 @@ public class FlashlightController : MonoBehaviour
         {
             isOn = !isOn;
             flashlight.enabled = isOn;
+            PlayToggleSound(); // Toca o som ao alternar o estado da lanterna
         }
 
         // Descarrega ou recarrega a bateria dependendo do estado da lanterna
@@ -85,6 +88,15 @@ public class FlashlightController : MonoBehaviour
         else
         {
             sliderFill.color = Color.yellow; // Amarelo enquanto a lanterna está ligada
+        }
+    }
+
+    // Toca o som ao alternar o estado da lanterna
+    private void PlayToggleSound()
+    {
+        if (flashlightAudio != null && toggleSound != null)
+        {
+            flashlightAudio.PlayOneShot(toggleSound);
         }
     }
 }

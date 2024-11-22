@@ -20,6 +20,9 @@ public class DestroyOnCollision : MonoBehaviour
 
     public FPSController fpsController; // Referência ao script FPSController para reiniciar o timer
 
+    public AudioSource audioSource; // Referência ao componente de áudio
+    public AudioClip somColeta; // Clip de áudio a ser tocado ao coletar a fita
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -61,6 +64,12 @@ public class DestroyOnCollision : MonoBehaviour
         // Verifica se o jogador está dentro do collider e pressionou "E" para coletar a fita
         if (jogadorDentroDoCollider && Input.GetKeyDown(KeyCode.E))
         {
+            // Toca o som da coleta
+            if (audioSource != null && somColeta != null)
+            {
+                audioSource.PlayOneShot(somColeta);
+            }
+
             // Destroi o objeto da fita após a coleta
             mensagemTexto.gameObject.SetActive(false); // Esconde a mensagem de interação
             Destroy(gameObject); // Destroi a fita coletada
