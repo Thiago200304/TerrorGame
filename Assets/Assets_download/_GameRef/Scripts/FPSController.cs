@@ -36,6 +36,8 @@ public class FPSController : MonoBehaviour
     public AudioSource audioSource; // Referência ao AudioSource
     public AudioClip audioAndar;    // Áudio para andar
 
+    private Color corOriginal; // Cor original do timer
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -66,6 +68,9 @@ public class FPSController : MonoBehaviour
         {
             timerTexto.gameObject.SetActive(true); // Certifique-se de que o texto do timer está ativo
             timerTexto.text = "Tempo: " + Mathf.Ceil(timer).ToString() + "s"; // Exibe o timer inicial
+
+            // Armazena a cor original do texto
+            corOriginal = timerTexto.color;
         }
 
         if (canvasDerrota != null)
@@ -120,6 +125,16 @@ public class FPSController : MonoBehaviour
             if (timerTexto != null)
             {
                 timerTexto.text = "Tempo: " + Mathf.Ceil(timer).ToString() + "s";
+
+                // Verifica se o timer chegou a 10 segundos e altera a cor
+                if (timer <= 10f)
+                {
+                    timerTexto.color = new Color32(67, 0, 0, 255); // Cor #430000
+                }
+                else
+                {
+                    timerTexto.color = corOriginal; // Restaura a cor original
+                }
             }
         }
         else if (timer <= 0)
@@ -217,12 +232,11 @@ public class FPSController : MonoBehaviour
         {
             timerTexto.text = "Tempo: " + Mathf.Ceil(timer).ToString() + "s";
         }
+        timerTexto.color = corOriginal; // Restaura a cor original quando o timer é reiniciado
     }
 
     private void EndGame()
     {
-        Time.timeScale = 0f;
-
         if (canvasDerrota != null)
         {
             canvasDerrota.SetActive(true); // Mostra o Canvas de derrota

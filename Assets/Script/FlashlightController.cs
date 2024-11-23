@@ -66,7 +66,7 @@ public class FlashlightController : MonoBehaviour
         isOn = false;
         flashlight.enabled = false;
         isRecharging = true;
-        sliderFill.color = Color.red;  // Muda a cor para vermelho quando a bateria acaba
+        sliderFill.color = new Color32(67, 0, 0, 255);  // Vermelho escuro (#430000) quando a bateria acaba
 
         yield return new WaitForSeconds(15f); // Espera 15 segundos para recarregar
 
@@ -79,7 +79,7 @@ public class FlashlightController : MonoBehaviour
     {
         if (isRecharging)
         {
-            sliderFill.color = Color.red; // Vermelho enquanto recarrega devido ao esgotamento completo
+            sliderFill.color = new Color32(67, 0, 0, 255); // Vermelho escuro (#430000) enquanto recarrega devido ao esgotamento completo
         }
         else if (!isOn)
         {

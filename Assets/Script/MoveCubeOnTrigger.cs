@@ -6,6 +6,7 @@ public class MoveCubeOnTrigger : MonoBehaviour
     public GameObject cubeToMove;    // O cubo que será movido
     public Transform newPosition;    // A nova posição para onde o cubo será movido
     public float moveDuration = 2f;  // Duração do movimento em segundos
+    public AudioSource audioSource;  // O componente de áudio que será ativado
 
     private bool isMoving = false;   // Controle para evitar iniciar o movimento múltiplas vezes
 
@@ -22,6 +23,13 @@ public class MoveCubeOnTrigger : MonoBehaviour
     private IEnumerator MoveCube()
     {
         isMoving = true;
+
+        // Toca o áudio, caso não esteja tocando
+        if (audioSource != null && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
+
         Vector3 startPosition = cubeToMove.transform.position;
         Vector3 targetPosition = newPosition.position;
         float elapsedTime = 0f;
@@ -35,6 +43,10 @@ public class MoveCubeOnTrigger : MonoBehaviour
 
         // Assegura que o cubo esteja exatamente na posição final ao término da animação
         cubeToMove.transform.position = targetPosition;
+
+        // Desativa o objeto atual para evitar que o som ou movimento aconteça novamente
+        gameObject.SetActive(false);
+
         isMoving = false;
     }
 }
