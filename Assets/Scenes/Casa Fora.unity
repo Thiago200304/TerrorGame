@@ -760,7 +760,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "BEM VINDO.\n\n- UTILIZE W,A,S,D PARA SE LOCOMOVER.\n- APERTE F PARA LIGAR/DESLIGAR
     SUA LANTERNA RECARREG\xC1VEL.\n- COLETE FITAS ANTES QUE O TEMPO ACABE, ELAS RESETAM
-    O TIMER.\n- JOGO COM FONES DE OUVIDO PARA UMA EXPERIENCIA COMPLETA.\n\nPRESSIONE
+    O TIMER.\n- JOGue COM FONES DE OUVIDO PARA UMA EXPERIENCIA COMPLETA.\n\nPRESSIONE
     ESPA\xC7O PARA COME\xC7AR."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 490bc43b1c8304644a3c4695497c5a3b, type: 2}
@@ -10250,7 +10250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988528143750009177, guid: 52dcc50deab3fa546bea09c01d45f2c7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5988528143750009253, guid: 52dcc50deab3fa546bea09c01d45f2c7, type: 3}
       propertyPath: m_Pivot.x
