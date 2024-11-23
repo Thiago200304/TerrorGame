@@ -38,6 +38,8 @@ public class FPSController : MonoBehaviour
 
     private Color corOriginal; // Cor original do timer
 
+    private bool timerIniciado = false; // Controle se o timer já foi iniciado após o clique
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -86,15 +88,9 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
-        if (canmove)
-        {
-            Move();
-            LookAround();
-        }
-
         if (Input.GetMouseButtonDown(0) && !mensagemMostrada)
         {
-            canmove = true;
+            canmove = true; // Habilita o movimento do personagem
 
             if (lanterna != null)
             {
@@ -114,12 +110,26 @@ public class FPSController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked; // Trava o cursor novamente
             Cursor.visible = false; // Torna o cursor invisível
 
-            MostrarMensagem("ENCONTRE A FITA");
-            mensagemMostrada = true; // Define que a mensagem foi mostrada
+            //MostrarMensagem("ENCONTRE AS FITAS");
+            //mensagemMostrada = true; // Define que a mensagem foi mostrada
+        }
+
+        // Quando o clique já ocorreu, espera o espaço para começar o timer
+        if (canmove && !timerIniciado && Input.GetKeyDown(KeyCode.Space))
+        {
+            timerIniciado = true; // Inicia o timer
+            MostrarMensagem("Jogo Iniciado! Encontre as fitas");
+            mensagemMostrada = true;
+        }
+
+        if (canmove)
+        {
+            Move();
+            LookAround();
         }
 
         // Atualizar o timer
-        if (canmove && timer > 0)
+        if (timerIniciado && timer > 0)
         {
             timer -= Time.deltaTime; // Diminui o timer a cada frame
             if (timerTexto != null)
